@@ -1,0 +1,39 @@
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("DOM cargado para validación de registro");
+
+    const form = document.getElementById("registro-form");
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();  // Detener el envío del formulario por defecto
+
+        let errorMessage = "";
+
+        const nombre = document.getElementById("nombre").value.trim();
+        const apellido = document.getElementById("apellido").value.trim();
+        const correo = document.getElementById("correo").value.trim();
+        const celular = document.getElementById("celular").value.trim();
+        const clave = document.getElementById("clave").value.trim();
+        const autorizo = document.getElementById("autorizo").checked;
+
+        if (!nombre || !apellido || !correo || !celular || !clave) {
+            errorMessage = "No puede haber campos vacíos.";
+        } else if (!autorizo) {
+            errorMessage = "Debes aceptar los términos y condiciones.";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
+            errorMessage = "Formato de correo no válido.";
+        }
+
+        if (errorMessage) {
+            Swal.fire({
+                title: '¡Error!',
+                text: errorMessage,
+                icon: 'error',
+                timer: 3000,
+                timerProgressBar: true
+            });
+            return false; // Detener el envío del formulario
+        }
+
+        form.submit(); // Si pasa la validación, enviar el formulario
+    });
+});
