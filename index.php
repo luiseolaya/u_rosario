@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/U_cicloparqueadero/CONFIG/DB_cicloparqueadero.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/U_cicloparqueadero/config/DB_cicloparqueadero.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/U_cicloparqueadero/controllers/UsuarioController.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/U_cicloparqueadero/controllers/EntradaController.php';
 

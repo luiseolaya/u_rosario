@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio sesion</title>
+    <title>Inicio sesión</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/U_cicloparqueadero/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -25,17 +25,19 @@
             </a>          
         </div>
         <div class="fs-2 text-start mb-3 mt-4 fw-bolder ms-2">Iniciar sesión</div>
-        <div class="form-floating mb-4 ms-2">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Correo Electronico</label>
-        </div>
-        <div class="form-floating ms-2">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Contraseña</label>
-        </div>
-        <div class="button group btn-group-lg mt-3 d-grid gap-2 ms-2">
-            <button type="button" id="Entrar" class="btn btn-outline-secondary mt-4 mb-4 fs-6">Entrar</button>
-        </div>
+        <form action="../controllers/UsuarioController.php" method="POST">
+            <div class="form-floating mb-4 ms-2">
+                <input type="email" class="form-control" id="floatingInput" name="correo" placeholder="name@example.com" required>
+                <label for="floatingInput">Correo Electronico</label>
+            </div>
+            <div class="form-floating ms-2">
+                <input type="password" class="form-control" id="floatingPassword" name="clave" placeholder="Password" required>
+                <label for="floatingPassword">Contraseña</label>
+            </div>
+            <div class="button group btn-group-lg mt-3 d-grid gap-2 ms-2">
+                <button type="submit" name="iniciar" class="btn btn-outline-secondary mt-4 mb-4 fs-6">Entrar</button>
+            </div>
+        </form>
     </div>
     <script src="/U_cicloparqueadero/js/val_inicio.js"></script>
 </body>
