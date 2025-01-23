@@ -3,9 +3,9 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-include_once __DIR__ . '/../config/DB_cicloparqueadero.php';
-include_once __DIR__ . '/../models/usuario.php';
-include_once __DIR__ . '/../models/entrada.php';
+require_once __DIR__ . '/../config/DB_cicloparqueadero.php';
+require_once __DIR__ . '/../models/usuario.php';
+require_once __DIR__ . '/../models/entrada.php';
 
 class UsuarioController {
     private $db;
@@ -79,11 +79,13 @@ class UsuarioController {
     }
 }
 
+// Verificar si se ha enviado el formulario de registrar
 if (isset($_POST['registrar'])) {
     $usuarioController = new UsuarioController();
     $usuarioController->registrar();
 }
 
+// Verificar si se ha enviado el formulario de iniciar sesión
 if (isset($_POST['iniciar'])) {
     $usuarioController = new UsuarioController();
     $usuarioController->iniciar();

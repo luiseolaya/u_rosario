@@ -3,7 +3,7 @@ class Usuario {
     private $conn;
     private $table_name = "usuarios";
 
-    public $id;
+    public $id_usuario;
     public $nombres;
     public $apellidos;
     public $correo;
@@ -17,6 +17,7 @@ class Usuario {
     // Método para crear un nuevo usuario
     public function crear() {
         $query = "INSERT INTO " . $this->table_name . " SET nombres=:nombres, apellidos=:apellidos, correo=:correo, celular=:celular, clave=:clave";
+
         $stmt = $this->conn->prepare($query);
 
         // Limpieza de datos
@@ -36,10 +37,14 @@ class Usuario {
         $stmt->bindParam(':celular', $this->celular);
         $stmt->bindParam(':clave', $this->clave);
 
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            printf("Error: %s.\n", $stmt->error);
+        try {
+            if ($stmt->execute()) {
+                return true;
+            }
+        } catch (PDOException $e) {
+            if ($e->getCode() == 23000) {  // Código de error para duplicidad de entrada
+                return false;
+            }
         }
 
         return false;
@@ -60,7 +65,7 @@ class Usuario {
             // Comparamos la clave ingresada con la clave almacenada en la base de datos
             if (password_verify($this->clave, $row['clave'])) {
                 // Si coinciden, establecemos las propiedades del objeto
-                $this->id = $row['id_usuario'];
+                $this->id_usuario = $row['id_usuario'];
                 $this->nombres = $row['nombres'];
                 $this->apellidos = $row['apellidos'];
                 $this->correo = $row['correo'];
