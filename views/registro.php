@@ -45,11 +45,11 @@ $error = $_SESSION['error'] ?? '';
                 <div class="fs-2 text-start mb-3 mt-4 fw-bolder ms-2">Iniciar sesión</div>
                 <form action="/U_cicloparqueadero/controllers/UsuarioController.php" method="POST">
                     <div class="form-floating mb-4 ms-2">
-                        <input type="email" class="form-control" id="floatingInput" name="correo" placeholder="name@example.com" required>
+                        <input type="email" class="form-control" id="floatingInput" name="correo" placeholder="name@example.com" >
                         <label for="floatingInput">Correo Electronico</label>
                     </div>
                     <div class="form-floating ms-2">
-                        <input type="password" class="form-control" id="floatingPassword" name="clave" placeholder="Password" required>
+                        <input type="password" class="form-control" id="floatingPassword" name="clave" placeholder="Password" >
                         <label for="floatingPassword">Contraseña</label>
                     </div>
                     <div class="button group btn-group-lg mt-3 d-grid gap-2 ms-2">
@@ -59,34 +59,34 @@ $error = $_SESSION['error'] ?? '';
             </div>
             <div id="formulario-registro" style="display:none;">
                 <div class="fs-2 text-start mb-3 mt-4 fw-bolder ms-2">Registrarse</div>
-                <form action="/U_cicloparqueadero/controllers/UsuarioController.php" method="POST">
+                <form id="registro-form" action="/U_cicloparqueadero/controllers/UsuarioController.php" method="POST">
                     <input type="hidden" name="registrar" value="1">
                     <div class="form-floating mb-3 ms-2">
-                        <input type="text" class="form-control" id="nombre" name="nombres" placeholder="Nombres" required>
+                        <input type="text" class="form-control" id="nombre" name="nombres" placeholder="Nombres" >
                         <label for="nombre">Nombres</label>
                     </div>
                     <div class="form-floating mb-3 ms-2">
-                        <input type="text" class="form-control" id="apellido" name="apellidos" placeholder="Apellidos" required>
+                        <input type="text" class="form-control" id="apellido" name="apellidos" placeholder="Apellidos" >
                         <label for="apellido">Apellidos</label>
                     </div>
                     <div class="form-floating mb-3 ms-2">
-                        <input type="email" class="form-control" id="correo" name="correo" placeholder="Correo Electrónico" required>
+                        <input type="email" class="form-control" id="correo" name="correo" placeholder="Correo Electrónico" >
                         <label for="correo">Correo Electrónico</label>
                     </div>
                     <div class="form-floating mb-3 ms-2">
-                        <input type="text" class="form-control" id="celular" name="celular" placeholder="Celular" required>
+                        <input type="text" class="form-control" id="celular" name="celular" placeholder="Celular" >
                         <label for="celular">Celular</label>
                     </div>
                     <div class="form-floating mb-3 ms-2">
-                        <input type="password" class="form-control" id="clave" name="clave" placeholder="Clave" required>
+                        <input type="password" class="form-control" id="clave" name="clave" placeholder="Clave" >
                         <label for="clave">Clave</label>
                     </div>
                     <div class="form-floating mb-3 ms-2">
-                        <input type="password" class="form-control" id="conf_clave" name="conf_clave" placeholder="Confirmar clave" required>
+                        <input type="password" class="form-control" id="conf_clave" name="conf_clave" placeholder="Confirmar clave" >
                         <label for="conf_clave">Confirmación clave</label>
                     </div>
                     <div class="mt-3 ms-2">
-                        <input type="checkbox" id="autorizo" name="autorizo" value="1" required>
+                        <input type="checkbox" id="autorizo" name="autorizo" value="1" >
                         <label for="autorizo">Autorizo los términos y condiciones</label>
                     </div>
                     <div class="button group btn-group-lg mt-3 d-grid gap-2 ms-2">

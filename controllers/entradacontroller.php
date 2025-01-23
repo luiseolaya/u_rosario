@@ -12,23 +12,26 @@ class EntradaController {
         $this->entrada = new Entrada($this->db);
     }
 
-   
+    // Método para registrar una entrada
     public function registrarEntrada() {
         if (!empty($_POST)) {
-            $this->entrada->id_usuario = $_POST['id_usuario'] ?? '';
+            $this->entrada->id_usuario = $_SESSION['id_usuario']; // Utiliza la sesión para obtener el ID del usuario
             $this->entrada->id_parqueadero = $_POST['id_parqueadero'] ?? '';
+            $this->entrada->codigo = $_POST['codigo'] ?? '';
+            $this->entrada->color = $_POST['color'] ?? '';
 
             if ($this->entrada->crearEntrada()) {
                 header("Location: ../views/inc_user.php");
                 exit;
             } else {
-                header("Location: ../views/error.php");
+                $_SESSION['error'] = 'Error al registrar la entrada.';
+                header("Location: ../views/reg_entrada.php");
                 exit;
             }
         }
     }
 
-    
+    // Método para registrar una salida
     public function registrarSalida() {
         if (!empty($_POST)) {
             $this->entrada->id_entrada = $_POST['id_entrada'] ?? '';
@@ -37,22 +40,26 @@ class EntradaController {
                 header("Location: ../views/inc_user.php");
                 exit;
             } else {
-                header("Location: ../views/error.php");
+                $_SESSION['error'] = 'Error al registrar la salida.';
+                header("Location: ../views/inc_user.php");
                 exit;
             }
         }
     }
 }
 
-
+// Verificar si se ha enviado el formulario de registrar entrada
 if (isset($_POST['registrar_entrada'])) {
     $entradaController = new EntradaController();
     $entradaController->registrarEntrada();
 }
 
-
+// Verificar si se ha enviado el formulario de registrar salida
 if (isset($_POST['registrar_salida'])) {
     $entradaController = new EntradaController();
     $entradaController->registrarSalida();
 }
 ?>
+
+
+

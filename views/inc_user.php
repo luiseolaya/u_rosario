@@ -13,22 +13,22 @@ $usuario = $data['usuario'];
 $entradas = $data['entradas'];
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio sesion</title>
+    <title>Inicio sesión</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/U_cicloparqueadero/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/U_cicloparqueadero/js/val_entrada.js"></script>
+    <script src="/U_cicloparqueadero/js/validacionENT.js"></script>
 </head>
 <body>
     <?php
     if (isset($_SESSION['mensaje'])) {
         echo "<script>
             Swal.fire({
-                title: 'Registro Exitoso',
+                title: '¡Éxito!',
                 text: '" . $_SESSION['mensaje'] . "',
                 icon: 'success',
                 timer: 3000,
@@ -48,11 +48,11 @@ $entradas = $data['entradas'];
         </div>
         <div><h5>Bienvenido, <?php echo htmlspecialchars($usuario['correo']); ?></h5></div>
         <div>
-            <a href="../logout.php">
-                <p class="text-end me-5">Salir</p>
-            </a>
+            <form action="../controllers/LogoutController.php" method="POST">
+                <button type="submit" name="logout" class="btn btn-outline-secondary">Salir</button>
+            </form>
         </div>
-        <a href="RegistrarENT.html">
+        <a href="reg_entrada.php">
             <div class="btn btn-outline-secondary mt-3 mb-4 me-4 btn-lg">+ Entrada</div>
         </a>
 
@@ -88,6 +88,6 @@ $entradas = $data['entradas'];
             </table>
         </div>
     </div>
-    <script src="../js/val_entrada.js"></script>
+    <script src="../js/validacionENT.js"></script>
 </body>
 </html>

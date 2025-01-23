@@ -34,9 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 timer: 3000,
                 timerProgressBar: true
             });
-            return false; // Detener el envío del formulario
+            return false;
         }
 
-        form.submit(); // Si pasa la validación, enviar el formulario
+        form.submit(); 
     });
 });

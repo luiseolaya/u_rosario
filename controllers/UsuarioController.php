@@ -29,6 +29,7 @@ class UsuarioController {
 
             if ($this->usuario->crear()) {
                 $_SESSION['correo'] = $this->usuario->correo;  // Establecer la sesión
+                $_SESSION['mensaje'] = 'Usuario registrado correctamente.';
                 header("Location: ../views/inc_user.php");
                 exit;
             } else {
@@ -49,7 +50,8 @@ class UsuarioController {
                 header("Location: ../views/inc_user.php");
                 exit;
             } else {
-                header("Location: ../views/error.php");
+                $_SESSION['error'] = 'Correo o contraseña incorrectos.';
+                header("Location: ../views/registro.php");
                 exit;
             }
         }
@@ -57,7 +59,7 @@ class UsuarioController {
 
     public function mostrarUsuarioYEntradas() {
         if (!isset($_SESSION['correo'])) {
-            header("Location: ../views/inicio_seccion.php");
+            header("Location: ../views/registro.php");
             exit;
         }
 
@@ -79,13 +81,11 @@ class UsuarioController {
     }
 }
 
-// Verificar si se ha enviado el formulario de registrar
 if (isset($_POST['registrar'])) {
     $usuarioController = new UsuarioController();
     $usuarioController->registrar();
 }
 
-// Verificar si se ha enviado el formulario de iniciar sesión
 if (isset($_POST['iniciar'])) {
     $usuarioController = new UsuarioController();
     $usuarioController->iniciar();

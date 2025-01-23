@@ -1,6 +1,4 @@
 const alerta = document.getElementById('alerta');
-
-
 const colores = ['#28a745', '#dc3545', '#ffc107', '#007bff', '#6f42c1']; 
 
 function seleccionarColorAleatorio() {
@@ -13,9 +11,7 @@ function generarMensajeAleatorio() {
     return `${numeroAleatorio}`; 
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
-   
     const colorAleatorio = seleccionarColorAleatorio();
     const mensajeAleatorio = generarMensajeAleatorio();
     
@@ -23,42 +19,38 @@ document.addEventListener('DOMContentLoaded', () => {
     alerta.textContent = mensajeAleatorio;
     alerta.style.display = 'block';
     
-   
     const EscogerColor = document.getElementById('EscogerColor');
     const codigo = document.getElementById('codigo'); 
     const btn = document.getElementById('registrar');
     
     btn.addEventListener('click', () => {
-        if (codigo.value === mensajeAleatorio) {
-            codigo=true;
-        } else {
-            alert('Codigo incorrecto');
+        if (codigo.value !== mensajeAleatorio) {
+            alert('Código incorrecto');
+            return;
         }
-    });
-    btn.addEventListener('click', () => {
-        if (EscogerColor.value === colorAleatorio) {
-            EscogerColor=true;
-        } else {
+        if (EscogerColor.value !== colorAleatorio) {
             alert('Color incorrecto');
+            return;
         }
+        verificarUbicacion();
     });
-    
 });
-// Coordenadas de referencia (Universidad del Rosario) parqueadero en el caso actual
+
+
 const latA = 4.601025504132103;
 const lngA = -74.07303884639771;
-const rangoMaximo = 100000; // 10 metros = 0.01 km
+const rangoMaximo = 0.01; // 10 metros = 0.01 km
 
-// Función para calcular la distancia entre dos coordenadas (en km)
+
 function calcularDistancia(lat1, lon1, lat2, lon2) {
-    const radioTierra = 6371; // Radio de la Tierra en km
+    const radioTierra = 6371; 
     const dLat = deg2rad(lat2 - lat1);
-    const dLon = deg2rad(lon2 - lon1);
+    const dLon = deg2rad(lon1 - lon2);
     const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
             Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
             Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return radioTierra * c; // Distancia en km
+    return radioTierra * c; 
 }
 
 function deg2rad(deg) {
@@ -66,7 +58,6 @@ function deg2rad(deg) {
 }
 
 
-// Función para obtener la ubicación del usuario
 function obtenerUbicacion() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(mostrarUbicacion, manejarError);
@@ -94,12 +85,14 @@ function mostrarUbicacion(position) {
 
 function realizarAccion(ubicacionValida) {
     if (ubicacionValida) {
-        // Si está dentro del rango, registrar la entrada o redirigir
+        // Si está dentro del rango, registrar la entrada
         alert("Registrando entrada...");
-        window.location.href = "PaginaPri.html"; // Cambia esta URL según lo necesario
+        // Aquí deberías agregar la lógica para registrar la entrada en la base de datos
+        // Luego redirigir a inc_user.php
+        window.location.href = "inc_user.php";
     } else {
         // Si está fuera del rango, mostrar un error
-        alert("Por favor, acércate a el parqueadero y vuelve a intentarlo.");
+        alert("Por favor, acércate al parqueadero y vuelve a intentarlo.");
         location.reload();
     }
 }
@@ -123,13 +116,4 @@ function manejarError(error) {
 
 function verificarUbicacion() {
     obtenerUbicacion(); // Llama a la función para obtener la ubicación
-} 
-
-
-function eliminarFila(boton) {
-    // Obtener la fila completa (el <tr>) en la que está el botón
-    var fila = boton.closest('tr');
-    
-    // Eliminar la fila de la tabla
-    fila.remove();
 }
