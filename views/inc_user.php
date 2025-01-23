@@ -28,18 +28,19 @@
     <div class="container text-center">
         <div class="mb-2 border border-secondary text-center mt-5 d-flex align-items-center">
         <img src="/U_cicloparqueadero/img/LOGOU.png" alt="Logo" class="me-3 ms-4" style="width: 50px; height: auto;">
-            <div>
+        <div>
                 <div class="fs-2 fw-bolder ms-3">Cicloparqueadero</div>
                 <div class="fs-6 fw-bolder mb-2 ms-3">Universidad del Rosario</div>
             </div>
         </div>
-        <div><h5></h5></div>
+        <div><h5>Bienvenido juan@urosario.edu.co</h5></div>
+        <div>
         <div>
             <a href="">
                 <p class="text-end me-5">Salir</p>
             </a>
         </div>
-        <a href="RegistrarENT.html">
+        <a href="registrarENT.php">
         <div class="btn btn-outline-secondary mt-3 mb-4 me-4 btn-lg ">+ Entrada</div>
         </a>
 
@@ -61,7 +62,7 @@
                         <td>Sede A</td>
                         <td>Evento A</td>
                         <td><button class="btn" onclick="eliminarFila(this)">
-                            <img src="image/Salida.png" width="30px" height="30px">
+                            <img src="/U_cicloparqueadero/img/salida.png" width="30px" height="30px">
                         </button></td>
                     </tr>
                     <tr>
@@ -70,13 +71,13 @@
                         <td>Sede B</td>
                         <td>Evento B</td>
                         <td><button class="btn" onclick="eliminarFila(this)">
-                            <img src="image/Salida.png" width="30px" height="30px">
+                            <img src="/U_cicloparqueadero/img/salida.png" width="30px" height="30px">
                         </button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <script src="js/validacionENT.js"></script>
+    <script src="/U_cicloparqueadero/js/val_entrada.js"></script>
 </body>
 </html>
