@@ -1,30 +1,18 @@
 <?php
-
 class Database {
     private $host = "localhost";
     private $db_name = "db_cicloparqueadero";
-    private $username = "root";
-    private $password = "";
+    private $username = "root"; // Cambia estos valores según tu configuración
+    private $password = ""; // Cambia estos valores según tu configuración
     public $conn;
 
-    // Método para establecer la conexión
     public function getConnection() {
         $this->conn = null;
-
         try {
-            // Configuración de la conexión usando PDO
-            $this->conn = new PDO(
-                "mysql:host=" . $this->host . ";dbname=" . $this->db_name,
-                $this->username,
-                $this->password
-            );
-
-            // Establecer el modo de error de PDO a excepción
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        } catch (PDOException $exception) {
-            // Captura el error y muestra un mensaje adecuado
-            echo "Error de conexión: " . $exception->getMessage();
+            $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
+            $this->conn->exec("set names utf8");
+        } catch(PDOException $exception) {
+            echo "Connection error: " . $exception->getMessage();
         }
 
         return $this->conn;

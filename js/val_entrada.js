@@ -1,4 +1,5 @@
 const alerta = document.getElementById('alerta');
+<<<<<<< HEAD
 const colores = ['#28a745', '#dc3545', '#ffc107', '#007bff', '#6f42c1'];
 
 function seleccionarColorAleatorio() {
@@ -12,6 +13,25 @@ function generarMensajeAleatorio() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+=======
+
+
+const colores = ['#28a745', '#dc3545', '#ffc107', '#007bff', '#6f42c1']; 
+
+function seleccionarColorAleatorio() {
+    const indiceAleatorio = Math.floor(Math.random() * colores.length);
+    return colores[indiceAleatorio];
+}
+
+function generarMensajeAleatorio() {
+    const numeroAleatorio = Math.floor(100000 + Math.random() * 900000);
+    return `${numeroAleatorio}`; 
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+   
+>>>>>>> aa77dc5f72a0bcc70357c177a16d92c44abb99ca
     const colorAleatorio = seleccionarColorAleatorio();
     const mensajeAleatorio = generarMensajeAleatorio();
     
@@ -19,14 +39,35 @@ document.addEventListener('DOMContentLoaded', () => {
     alerta.textContent = mensajeAleatorio;
     alerta.style.display = 'block';
     
+<<<<<<< HEAD
+=======
+   
+>>>>>>> aa77dc5f72a0bcc70357c177a16d92c44abb99ca
     const EscogerColor = document.getElementById('EscogerColor');
     const codigo = document.getElementById('codigo'); 
     const btn = document.getElementById('registrar');
     
     btn.addEventListener('click', () => {
+<<<<<<< HEAD
         verificarValidaciones(colorAleatorio, mensajeAleatorio, codigo.value, EscogerColor.value);
+=======
+        if (codigo.value === mensajeAleatorio) {
+            codigo=true;
+        } else {
+            alert('Codigo incorrecto');
+        }
+>>>>>>> aa77dc5f72a0bcc70357c177a16d92c44abb99ca
     });
+    btn.addEventListener('click', () => {
+        if (EscogerColor.value === colorAleatorio) {
+            EscogerColor=true;
+        } else {
+            alert('Color incorrecto');
+        }
+    });
+    
 });
+<<<<<<< HEAD
 
 let verificacionFallida = false;
 
@@ -64,6 +105,18 @@ function calcularDistancia(lat1, lon1, lat2, lon2) {
     const radioTierra = 6371; // Radio de la Tierra en km
     const dLat = deg2rad(lat2 - lat1);
     const dLon = deg2rad(lat2 - lon1);
+=======
+// Coordenadas de referencia (Universidad del Rosario) parqueadero en el caso actual
+const latA = 4.601025504132103;
+const lngA = -74.07303884639771;
+const rangoMaximo = 100000; // 10 metros = 0.01 km
+
+// Función para calcular la distancia entre dos coordenadas (en km)
+function calcularDistancia(lat1, lon1, lat2, lon2) {
+    const radioTierra = 6371; // Radio de la Tierra en km
+    const dLat = deg2rad(lat2 - lat1);
+    const dLon = deg2rad(lon2 - lon1);
+>>>>>>> aa77dc5f72a0bcc70357c177a16d92c44abb99ca
     const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
             Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
             Math.sin(dLon / 2) * Math.sin(dLon / 2);
@@ -75,6 +128,11 @@ function deg2rad(deg) {
     return deg * (Math.PI / 180);
 }
 
+<<<<<<< HEAD
+=======
+
+// Función para obtener la ubicación del usuario
+>>>>>>> aa77dc5f72a0bcc70357c177a16d92c44abb99ca
 function obtenerUbicacion() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(mostrarUbicacion, manejarError);
@@ -83,13 +141,23 @@ function obtenerUbicacion() {
     }
 }
 
+<<<<<<< HEAD
+=======
+// Función para mostrar la ubicación del usuario y verificar si está en el rango
+>>>>>>> aa77dc5f72a0bcc70357c177a16d92c44abb99ca
 function mostrarUbicacion(position) {
     const latB = position.coords.latitude;
     const lngB = position.coords.longitude;
 
     const distancia = calcularDistancia(latA, lngA, latB, lngB);
 
+<<<<<<< HEAD
     if (distancia <= rangoMaximo) {
+=======
+    // Verificar si la distancia es menor o igual a 10 metros (0.01 km)
+    if (distancia <= rangoMaximo) {
+        alert('Estás dentro del rango.');
+>>>>>>> aa77dc5f72a0bcc70357c177a16d92c44abb99ca
         realizarAccion(true);
     } else {
         alert('Estás fuera del rango permitido.');
@@ -99,10 +167,19 @@ function mostrarUbicacion(position) {
 
 function realizarAccion(ubicacionValida) {
     if (ubicacionValida) {
+<<<<<<< HEAD
         alert("Registrando entrada...");
         window.location.href = "/U_cicloparqueadero/views/inc_user.php"; // Cambia esta URL según lo necesario
     } else {
         alert("Por favor, acércate al parqueadero y vuelve a intentarlo.");
+=======
+        // Si está dentro del rango, registrar la entrada o redirigir
+        alert("Registrando entrada...");
+        window.location.href = "PaginaPri.html"; // Cambia esta URL según lo necesario
+    } else {
+        // Si está fuera del rango, mostrar un error
+        alert("Por favor, acércate a el parqueadero y vuelve a intentarlo.");
+>>>>>>> aa77dc5f72a0bcc70357c177a16d92c44abb99ca
         location.reload();
     }
 }
@@ -125,6 +202,7 @@ function manejarError(error) {
 }
 
 function verificarUbicacion() {
+<<<<<<< HEAD
     obtenerUbicacion();
 }
 
@@ -132,3 +210,16 @@ function eliminarFila(boton) {
     var fila = boton.closest('tr');
     fila.remove();
 }
+=======
+    obtenerUbicacion(); // Llama a la función para obtener la ubicación
+} 
+
+
+function eliminarFila(boton) {
+    // Obtener la fila completa (el <tr>) en la que está el botón
+    var fila = boton.closest('tr');
+    
+    // Eliminar la fila de la tabla
+    fila.remove();
+}
+>>>>>>> aa77dc5f72a0bcc70357c177a16d92c44abb99ca

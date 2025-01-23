@@ -1,31 +1,30 @@
 <?php
 class Entrada {
     private $conn;
-    private $table_name = "parqueadero_entrada";
+    private $table_name = "entrada";
 
-    public $id;
-    public $usuario_id;
-    public $fecha_entrada;
-    public $fecha_salida;
-    public $placa_vehiculo;
+    public $id_entrada;
+    public $id_usuario;
+    public $id_parqueadero;
+    public $fecha_hora;
 
     public function __construct($db) {
         $this->conn = $db;
     }
 
-    // Método para registrar una nueva entrada
+    // Método para crear una nueva entrada
     public function crearEntrada() {
-        $query = "INSERT INTO " . $this->table_name . " SET usuario_id=:usuario_id, placa_vehiculo=:placa_vehiculo, fecha_entrada=NOW()";
+        $query = "INSERT INTO " . $this->table_name . " SET id_usuario=:id_usuario, id_parqueadero=:id_parqueadero, fecha_hora=NOW()";
 
         $stmt = $this->conn->prepare($query);
 
         // Limpieza de datos
-        $this->usuario_id = htmlspecialchars(strip_tags($this->usuario_id));
-        $this->placa_vehiculo = htmlspecialchars(strip_tags($this->placa_vehiculo));
+        $this->id_usuario = htmlspecialchars(strip_tags($this->id_usuario));
+        $this->id_parqueadero = htmlspecialchars(strip_tags($this->id_parqueadero));
 
         // Bind de cada valor
-        $stmt->bindParam(':usuario_id', $this->usuario_id);
-        $stmt->bindParam(':placa_vehiculo', $this->placa_vehiculo);
+        $stmt->bindParam(':id_usuario', $this->id_usuario);
+        $stmt->bindParam(':id_parqueadero', $this->id_parqueadero);
 
         if ($stmt->execute()) {
             return true;
@@ -34,17 +33,17 @@ class Entrada {
         return false;
     }
 
-    // Método para registrar una nueva salida
+    // Método para registrar una salida
     public function crearSalida() {
-        $query = "UPDATE " . $this->table_name . " SET fecha_salida=NOW() WHERE id=:id";
+        $query = "DELETE FROM " . $this->table_name . " WHERE id_entrada = :id_entrada";
 
         $stmt = $this->conn->prepare($query);
 
         // Limpieza de datos
-        $this->id = htmlspecialchars(strip_tags($this->id));
+        $this->id_entrada = htmlspecialchars(strip_tags($this->id_entrada));
 
-        // Bind del valor
-        $stmt->bindParam(':id', $this->id);
+        // Bind de cada valor
+        $stmt->bindParam(':id_entrada', $this->id_entrada);
 
         if ($stmt->execute()) {
             return true;

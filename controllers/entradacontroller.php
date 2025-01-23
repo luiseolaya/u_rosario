@@ -1,6 +1,6 @@
 <?php
-require_once('C:\xampp\htdocs\U_cicloparqueadero\CONFIG\DB_cicloparqueadero.php');
-require_once('C:\xampp\htdocs\U_cicloparqueadero\models\entrada.php');
+require_once __DIR__ . '/../config/DB_cicloparqueadero.php';
+require_once __DIR__ . '/../models/entrada.php';
 
 class EntradaController {
     private $db;
@@ -12,11 +12,11 @@ class EntradaController {
         $this->entrada = new Entrada($this->db);
     }
 
-    // Método para registrar una entrada
+   
     public function registrarEntrada() {
         if (!empty($_POST)) {
-            $this->entrada->usuario_id = $_POST['usuario_id'] ?? '';
-            $this->entrada->placa_vehiculo = $_POST['placa_vehiculo'] ?? '';
+            $this->entrada->id_usuario = $_POST['id_usuario'] ?? '';
+            $this->entrada->id_parqueadero = $_POST['id_parqueadero'] ?? '';
 
             if ($this->entrada->crearEntrada()) {
                 header("Location: ../views/inc_user.php");
@@ -28,10 +28,10 @@ class EntradaController {
         }
     }
 
-    // Método para registrar una salida
+    
     public function registrarSalida() {
         if (!empty($_POST)) {
-            $this->entrada->id = $_POST['entrada_id'] ?? '';
+            $this->entrada->id_entrada = $_POST['id_entrada'] ?? '';
 
             if ($this->entrada->crearSalida()) {
                 header("Location: ../views/inc_user.php");
@@ -44,13 +44,13 @@ class EntradaController {
     }
 }
 
-// Verificar si se ha enviado el formulario de registrar entrada
+
 if (isset($_POST['registrar_entrada'])) {
     $entradaController = new EntradaController();
     $entradaController->registrarEntrada();
 }
 
-// Verificar si se ha enviado el formulario de registrar salida
+
 if (isset($_POST['registrar_salida'])) {
     $entradaController = new EntradaController();
     $entradaController->registrarSalida();

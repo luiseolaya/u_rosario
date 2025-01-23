@@ -1,7 +1,8 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/U_cicloparqueadero/CONFIG/DB_cicloparqueadero.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/U_cicloparqueadero/config/DB_cicloparqueadero.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/U_cicloparqueadero/controllers/UsuarioController.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/U_cicloparqueadero/controllers/EntradaController.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/U_cicloparqueadero/controllers/LogoutController.php';
 
 $request = $_SERVER['REQUEST_URI'];
 $request = str_replace("/U_cicloparqueadero/", "", $request);
@@ -16,7 +17,7 @@ switch ($request) {
         $controller->registrar();
         break;
     case 'inicio_seccion':
-        require $_SERVER['DOCUMENT_ROOT'] . '/U_cicloparqueadero/views/ini_seccion.php';
+        require $_SERVER['DOCUMENT_ROOT'] . '/U_cicloparqueadero/views/inicio_seccion.php';
         break;
     case 'inc_user':
         require $_SERVER['DOCUMENT_ROOT'] . '/U_cicloparqueadero/views/inc_user.php';
@@ -28,6 +29,10 @@ switch ($request) {
     case 'registrar_salida':
         $controller = new EntradaController();
         $controller->registrarSalida();
+        break;
+    case 'logout':
+        $controller = new LogoutController();
+        $controller->logout();
         break;
     default:
         http_response_code(404);

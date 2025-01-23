@@ -1,3 +1,17 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+require_once '../controllers/UsuarioController.php';
+
+// Crear una instancia del controlador
+$usuarioController = new UsuarioController();
+
+// Obtener los datos del usuario y las entradas
+$data = $usuarioController->mostrarUsuarioYEntradas();
+$usuario = $data['usuario'];
+$entradas = $data['entradas'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +25,6 @@
 </head>
 <body>
     <?php
-    session_start();
     if (isset($_SESSION['mensaje'])) {
         echo "<script>
             Swal.fire({
@@ -27,21 +40,35 @@
     ?>
     <div class="container text-center">
         <div class="mb-2 border border-secondary text-center mt-5 d-flex align-items-center">
+<<<<<<< HEAD
         <img src="/U_cicloparqueadero/img/LOGOU.png" alt="Logo" class="me-3 ms-4" style="width: 50px; height: auto;">
         <div>
+=======
+            <img src="/U_cicloparqueadero/img/LOGOU.png" alt="Logo" class="me-3 ms-4" style="width: 50px; height: auto;">
+            <div>
+>>>>>>> aa77dc5f72a0bcc70357c177a16d92c44abb99ca
                 <div class="fs-2 fw-bolder ms-3">Cicloparqueadero</div>
                 <div class="fs-6 fw-bolder mb-2 ms-3">Universidad del Rosario</div>
             </div>
         </div>
+<<<<<<< HEAD
         <div><h5>Bienvenido juan@urosario.edu.co</h5></div>
         <div>
+=======
+        <div><h5>Bienvenido, <?php echo htmlspecialchars($usuario['correo']); ?></h5></div>
+>>>>>>> aa77dc5f72a0bcc70357c177a16d92c44abb99ca
         <div>
-            <a href="">
+            <a href="../logout.php">
                 <p class="text-end me-5">Salir</p>
             </a>
         </div>
+<<<<<<< HEAD
         <a href="registrarENT.php">
         <div class="btn btn-outline-secondary mt-3 mb-4 me-4 btn-lg ">+ Entrada</div>
+=======
+        <a href="RegistrarENT.html">
+            <div class="btn btn-outline-secondary mt-3 mb-4 me-4 btn-lg">+ Entrada</div>
+>>>>>>> aa77dc5f72a0bcc70357c177a16d92c44abb99ca
         </a>
 
         <div>
@@ -56,6 +83,7 @@
                     </tr>
                 </thead>
                 <tbody>
+<<<<<<< HEAD
                     <tr>
                         <th scope="row">&#x2611;&#xfe0f;</th>
                         <td>24/06/2024</td>
@@ -74,10 +102,32 @@
                             <img src="/U_cicloparqueadero/img/salida.png" width="30px" height="30px">
                         </button></td>
                     </tr>
+=======
+                    <?php foreach ($entradas as $entrada): ?>
+                        <tr>
+                            <th scope="row">&#x2611;&#xfe0f;</th>
+                            <td><?php echo htmlspecialchars($entrada['fecha_hora']); ?></td>
+                            <td><?php echo htmlspecialchars($entrada['id_parqueadero']); ?></td>
+                            <td>Evento</td>
+                            <td>
+                                <form action="../controllers/EntradaController.php" method="POST">
+                                    <input type="hidden" name="id_entrada" value="<?php echo htmlspecialchars($entrada['id_entrada']); ?>">
+                                    <button type="submit" name="registrar_salida" class="btn">
+                                        <img src="/U_cicloparqueadero/img/Salida.png" width="30px" height="30px">
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+>>>>>>> aa77dc5f72a0bcc70357c177a16d92c44abb99ca
                 </tbody>
             </table>
         </div>
     </div>
+<<<<<<< HEAD
     <script src="/U_cicloparqueadero/js/val_entrada.js"></script>
+=======
+    <script src="../js/val_entrada.js"></script>
+>>>>>>> aa77dc5f72a0bcc70357c177a16d92c44abb99ca
 </body>
 </html>
