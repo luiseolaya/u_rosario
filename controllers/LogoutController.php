@@ -11,7 +11,6 @@ class LogoutController {
     }
 }
 
-// Verificar si se ha enviado la solicitud de logout
 if (isset($_POST['logout'])) {
     $logoutController = new LogoutController();
     $logoutController->logout();
