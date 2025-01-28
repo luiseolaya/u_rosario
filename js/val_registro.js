@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
     console.log("DOM cargado para validación de registro");
 

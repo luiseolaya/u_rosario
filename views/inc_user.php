@@ -88,6 +88,6 @@ $entradas = $data['entradas'];
             </table>
         </div>
     </div>
-    <script src="../js/validacionENT.js"></script>
+    <script src="/U_cicloparqueadero/js/validacionENT.js"></script>
 </body>
 </html>

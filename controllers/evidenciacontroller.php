@@ -1,4 +1,3 @@
-// controllers/EvidenciaController.php
 <?php
 require_once __DIR__ . '/../config/DB_cicloparqueadero.php';
 require_once __DIR__ . '/../models/ModeloEvidencia.php';
@@ -17,7 +16,7 @@ class EvidenciaController {
         session_start();
         if (!isset($_SESSION['id_usuario'])) {
             $_SESSION['error'] = 'Debe iniciar sesión para registrar una entrada.';
-            header("Location: ../views/registro.php");
+            header("Location: ../views/login.php");
             exit;
         }
 

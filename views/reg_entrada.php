@@ -48,31 +48,33 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
         <div class="fs-2 text-start ms-2 mb-2 mt-2 fw-bolder">+ Entrada</div>
         <div class="text-start ms-3"><p>Favor colocar el código numérico que sale en la parte superior y elegir el color correspondiente</p></div>
         
-        <div class="form-floating mb-3 ms-2">
-            <input type="text" class="form-control" id="codigo" placeholder="Ingrese el código">
-            <label for="codigo">Ingrese el código</label> 
-        </div>
-        <div class="form-floating mb-3 ms-2">
-            <select class="form-select" id="EscogerColor">
-                <option selected>Seleccione el color</option>
-                <option value="#28a745">Verde</option>
-                <option value="#ffc107">Amarillo</option>
-                <option value="#007bff">Azul</option>
-                <option value="#dc3545">Rojo</option>
-                <option value="#6f42c1">Morado</option>
-            </select>
-        </div>
-        <div class="form-floating mb-3 ms-2">
-            <select class="form-select" id="Parqueadero">
-                <option selected>Seleccione el Cicloparqueadero</option>
-                <option value="1">Parqueadero A</option>
-                <option value="2">Parqueadero B</option>
-            </select>
-        </div>
-
-        <div class="button group btn-group-lg mt-2 d-grid gap-2 ms-2">
-            <button type="button" id="registrar" class="btn btn-outline-secondary mt-2 mb-4 fs-6">Registrar entrada</button>
-        </div>
+      <!-- reg_entrada.php -->
+<form id="entrada-form" action="/U_cicloparqueadero/index.php?registrar_entrada=true" method="POST">
+    <div class="form-floating mb-3 ms-2">
+        <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Ingrese el código" required>
+        <label for="codigo">Ingrese el código</label> 
+    </div>
+    <div class="form-floating mb-3 ms-2">
+        <select class="form-select" id="EscogerColor" name="color" required>
+            <option selected>Seleccione el color</option>
+            <option value="#28a745">Verde</option>
+            <option value="#ffc107">Amarillo</option>
+            <option value="#007bff">Azul</option>
+            <option value="#dc3545">Rojo</option>
+            <option value="#6f42c1">Morado</option>
+        </select>
+    </div>
+    <div class="form-floating mb-3 ms-2">
+        <select class="form-select" id="Parqueadero" name="id_parqueadero" required>
+            <option selected>Seleccione el Cicloparqueadero</option>
+            <option value="1">Parqueadero A</option>
+            <option value="2">Parqueadero B</option>
+        </select>
+    </div>
+    <div class="button group btn-group-lg mt-2 d-grid gap-2 ms-2">
+        <button type="submit" name="registrar_entrada" id="registrar" class="btn btn-outline-secondary mt-2 mb-4 fs-6">Registrar entrada</button>
+    </div>
+</form>
     </div>
     <script src="/U_cicloparqueadero/js/validacionENT.js"></script>
 </body>

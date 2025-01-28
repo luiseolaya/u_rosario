@@ -2,8 +2,8 @@
 class Database {
     private $host = "localhost";
     private $db_name = "db_cicloparqueadero";
-    private $username = "root"; // Cambia estos valores según tu configuración
-    private $password = ""; // Cambia estos valores según tu configuración
+    private $username = "root"; 
+    private $password = ""; 
     public $conn;
 
     public function getConnection() {
