@@ -47,11 +47,11 @@ $entradas = $data['entradas'];
             </div>
         </div>
         <div><h5>Bienvenido, <?php echo htmlspecialchars($usuario['correo']); ?></h5></div>
-        <div>
+    
             <form action="../controllers/LogoutController.php" method="POST">
                 <button type="submit" name="logout" class="btn btn-outline-secondary">Salir</button>
             </form>
-        </div>
+    
         <a href="reg_entrada.php">
             <div class="btn btn-outline-secondary mt-3 mb-4 me-4 btn-lg">+ Entrada</div>
         </a>

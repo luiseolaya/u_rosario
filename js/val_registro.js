@@ -22,8 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
             errorMessage = "Debes aceptar los términos y condiciones.";
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
             errorMessage = "Formato de correo no válido.";
-        } else if(clave !== conf_clave ){
+        } else if (clave !== conf_clave) {
             errorMessage = "Las contraseñas no coinciden.";
+        } else if (/\d/.test(nombre)) {  
+            errorMessage = "El nombre no puede tener números.";
+        } else if (/\d/.test(apellido)) {  
+            errorMessage = "El apellido no puede tener números.";
         }
 
         if (errorMessage) {
@@ -34,9 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 timer: 3000,
                 timerProgressBar: true
             });
-            return false;
+            return false; // Detener el envío del formulario
         }
 
-        form.submit(); 
+        form.submit();  // Si todo está bien, enviamos el formulario
     });
 });
