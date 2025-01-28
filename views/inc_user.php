@@ -21,7 +21,6 @@ $entradas = $data['entradas'];
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/U_cicloparqueadero/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/U_cicloparqueadero/js/validacionENT.js"></script>
 </head>
 <body>
     <?php
@@ -88,6 +87,5 @@ $entradas = $data['entradas'];
             </table>
         </div>
     </div>
-    <script src="/U_cicloparqueadero/js/validacionENT.js"></script>
 </body>
 </html>

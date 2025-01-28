@@ -1,48 +1,93 @@
-// controllers/EvidenciaController.php
 <?php
-require_once __DIR__ . '/../config/DB_cicloparqueadero.php';
-require_once __DIR__ . '/../models/ModeloEvidencia.php';
 
-class EvidenciaController {
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+require_once __DIR__ . '/../config/DB_cicloparqueadero.php';
+require_once __DIR__ . '/../models/usuario.php';
+require_once __DIR__ . '/../models/entrada.php';
+
+class UsuarioController {
     private $db;
-    private $evidencia;
+    private $usuario;
+    private $entrada;
 
     public function __construct() {
         $database = new Database();
         $this->db = $database->getConnection();
-        $this->evidencia = new ModeloEvidencia($this->db);
+        $this->usuario = new Usuario($this->db);
+        $this->entrada = new Entrada($this->db);
     }
 
-    public function subirEvidencia() {
-        session_start();
-        if (!isset($_SESSION['id_usuario'])) {
-            $_SESSION['error'] = 'Debe iniciar sesión para registrar una entrada.';
-            header("Location: ../views/registro.php");
-            exit;
-        }
+    public function registrar() {
+        if (!empty($_POST)) {
+            $this->usuario->nombres = $_POST['nombres'] ?? '';
+            $this->usuario->apellidos = $_POST['apellidos'] ?? '';
+            $this->usuario->correo = $_POST['correo'] ?? '';
+            $this->usuario->celular = $_POST['celular'] ?? '';
+            $this->usuario->clave = $_POST['clave'] ?? '';
 
-        if (isset($_SESSION['entrada_temp'])) {
-            $this->evidencia->id_usuario = $_SESSION['id_usuario'];
-            $this->evidencia->id_parqueadero = $_SESSION['entrada_temp']['id_parqueadero'];
-            $this->evidencia->codigo = $_SESSION['entrada_temp']['codigo'];
-            $this->evidencia->color = $_SESSION['entrada_temp']['color'];
-            $this->evidencia->evidencia = $_POST['evidencia'] ?? null;
-
-            if ($this->evidencia->crearEvidencia()) {
-                unset($_SESSION['entrada_temp']);
+            if ($this->usuario->crear()) {
+                $_SESSION['correo'] = $this->usuario->correo;  // Establecer la sesión
+                $_SESSION['mensaje'] = 'Usuario registrado correctamente.';
                 header("Location: ../views/inc_user.php");
                 exit;
             } else {
-                $_SESSION['error'] = 'Error al registrar la evidencia.';
-                header("Location: ../views/reg_entrada.php");
+                $_SESSION['error'] = 'El correo electrónico ya está registrado.';
+                header("Location: ../views/registro.php");
                 exit;
             }
         }
     }
+
+    public function iniciar() {
+        if (!empty($_POST)) {
+            $this->usuario->correo = $_POST['correo'] ?? '';
+            $this->usuario->clave = $_POST['clave'] ?? '';
+
+            if ($this->usuario->validar()) {
+                $_SESSION['correo'] = $this->usuario->correo;  // Establecer la sesión
+                header("Location: ../views/inc_user.php");
+                exit;
+            } else {
+                $_SESSION['error'] = 'Correo o contraseña incorrectos.';
+                header("Location: ../views/registro.php");
+                exit;
+            }
+        }
+    }
+
+    public function mostrarUsuarioYEntradas() {
+        if (!isset($_SESSION['correo'])) {
+            header("Location: ../views/registro.php");
+            exit;
+        }
+
+        // Obtener la información del usuario
+        $query = "SELECT id_usuario, nombres, apellidos, correo FROM usuarios WHERE correo = :correo";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':correo', $_SESSION['correo']);
+        $stmt->execute();
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Obtener las entradas del usuario
+        $queryEntradas = "SELECT * FROM entrada WHERE id_usuario = :id_usuario";
+        $stmtEntradas = $this->db->prepare($queryEntradas);
+        $stmtEntradas->bindParam(':id_usuario', $usuario['id_usuario']);
+        $stmtEntradas->execute();
+        $entradas = $stmtEntradas->fetchAll(PDO::FETCH_ASSOC);
+
+        return ['usuario' => $usuario, 'entradas' => $entradas];
+    }
 }
 
-if (isset($_POST['subir_evidencia'])) {
-    $evidenciaController = new EvidenciaController();
-    $evidenciaController->subirEvidencia();
+if (isset($_POST['registrar'])) {
+    $usuarioController = new UsuarioController();
+    $usuarioController->registrar();
+}
+
+if (isset($_POST['iniciar'])) {
+    $usuarioController = new UsuarioController();
+    $usuarioController->iniciar();
 }
 ?>

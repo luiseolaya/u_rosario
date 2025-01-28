@@ -15,7 +15,7 @@
                 <div class="fs-6 fw-bolder mb-2 ms-3">Universidad del Rosario</div>
             </div>
         </div>
-        <div><h5>Bienvenido juan@urosario.edu.co</h5></div>
+        <div><h5>Bienvenido, <?php echo htmlspecialchars($usuario['correo']); ?></h5></div>
         <div>
             <a href="logout.html">
                 <p class="text-end me-5">Salir</p>
@@ -31,7 +31,6 @@
         const canvas = document.getElementById('canvas');
         const photo = document.getElementById('photo');
         const startbutton = document.getElementById('startbutton');
-
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(stream => {
                 video.srcObject = stream;
@@ -40,7 +39,6 @@
             .catch(err => {
                 console.error("Error al acceder a la cámara: ", err);
             });
-
         startbutton.addEventListener('click', () => {
             const context = canvas.getContext('2d');
             canvas.width = video.videoWidth;
