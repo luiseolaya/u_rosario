@@ -6,7 +6,6 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once __DIR__ . '/../config/DB_cicloparqueadero.php';
 require_once __DIR__ . '/../models/usuario.php';
 require_once __DIR__ . '/../models/entrada.php';
-
 class UsuarioController {
     private $db;
     private $usuario;
