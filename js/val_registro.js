@@ -1,7 +1,3 @@
-
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM cargado para validación de registro");
-
     const form = document.getElementById("registro-form");
 
     form.addEventListener("submit", (event) => {
@@ -44,4 +40,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
         form.submit();  // Si todo está bien, enviamos el formulario
     });
-});

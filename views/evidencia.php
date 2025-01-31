@@ -56,7 +56,7 @@
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
         const data = canvas.toDataURL('image/png');
         photo.setAttribute('src', data);
-        evidencia.value = data; // Guardar la imagen como evidencia
+        evidencia.value = data; 
     });
 </script>
 </body>

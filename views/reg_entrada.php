@@ -6,13 +6,13 @@
     <title>Registrar entrada</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/U_cicloparqueadero/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../js/validacion.js"></script>
 </head>
 <body>
 <div class="container text-center">
     <?php
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
+    session_start();
     if (!isset($_SESSION['correo'])) {
         header("Location: registro.php");
         exit;
@@ -27,16 +27,17 @@
     </div>
     <div><h5>Bienvenido, <?php echo htmlspecialchars($_SESSION['correo']); ?></h5></div>
     
-    <form action="../controllers/LogoutController.php" method="POST">
-        <button type="submit" name="logout" class="btn btn-outline-secondary">Salir</button>
-    </form>
-
-    <form action="/U_cicloparqueadero/index.php?registrar_entrada=true" method="POST">
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
+        </div>
+    <?php endif; ?>
+    
+    <form action="../controllers/entradacontroller.php" method="POST">
         <div id="alerta" class="text-center" style="display: none; padding: 20px; color: white; border-radius: 5px; margin-top: 10px;"></div>
         <div class="fs-2 text-start ms-2 mb-2 mt-2 fw-bolder">+ Entrada</div>
         <div class="text-start ms-3"><p>Favor colocar el código numérico que sale en la parte superior y elegir el color correspondiente</p></div>
         
-        <!-- reg_entrada.php -->
         <div class="form-floating mb-3 ms-2">
             <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Ingrese el código" required>
             <label for="codigo">Ingrese el código</label> 
@@ -63,6 +64,6 @@
         </div>
     </form>
 </div>
-<script src="/U_cicloparqueadero/js/validacionENT.js"></script>
+<script src="../js/validacionENT.js"></script>
 </body>
 </html>
