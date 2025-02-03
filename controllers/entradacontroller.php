@@ -45,19 +45,54 @@ class EntradaController {
                 exit;
             }
 
-            // Validación de ubicación (simplificada)
+           // Validación de ubicación
+               //if (!isset($_POST['latitud']) || !isset($_POST['longitud'])) {
+                 //$_SESSION['error'] = 'Ubicación no proporcionada.';
+                 //header("Location: ../views/reg_entrada.php");
+                //exit;
+                 //}
+
+            $latB = $_POST['latitud'];
+            $lngB = $_POST['longitud'];
             $id_parqueadero = $_POST['id_parqueadero'];
 
-            if (!in_array($id_parqueadero, [1, 2])) {
+            // Coordenadas de los parqueaderos
+            $parqueaderos = [
+                1 => ['lat' => 4.601025504132103, 'lng' => -74.07303884639771], // Parqueadero A
+                2 => ['lat' => 4.602025504132103, 'lng' => -74.07403884639771]  // Parqueadero B
+            ];
+
+            if (!array_key_exists($id_parqueadero, $parqueaderos)) {
                 $_SESSION['error'] = 'Parqueadero incorrecto';
                 header("Location: ../views/reg_entrada.php");
                 exit;
             }
 
+            $parqueadero = $parqueaderos[$id_parqueadero];
+            $distancia = $this->calcularDistancia($parqueadero['lat'], $parqueadero['lng'], $latB, $lngB);
+
+            if ($distancia > 100000000000000000000000) { // 10 metros en km
+                $_SESSION['error'] = 'Estás fuera del rango permitido.';
+                header("Location: ../views/reg_entrada.php");
+                exit;
+            }
+
+            // Si todo está bien, guardar la entrada temporal y redirigir
             $_SESSION['entrada_temp'] = $_POST;
             header("Location: ../views/evidencia.php");
             exit;
         }
+    }
+
+    private function calcularDistancia($lat1, $lon1, $lat2, $lon2) {
+        $radioTierra = 6371; // Radio de la Tierra en km
+        $dLat = deg2rad($lat2 - $lat1);
+        $dLon = deg2rad($lon2 - $lon1);
+        $a = sin($dLat / 2) * sin($dLat / 2) +
+             cos(deg2rad($lat1)) * cos(deg2rad($lat2)) *
+             sin($dLon / 2) * sin($dLon / 2);
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+        return $radioTierra * $c; // Distancia en km
     }
 }
 
