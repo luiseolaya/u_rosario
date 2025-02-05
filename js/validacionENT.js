@@ -1,29 +1,27 @@
-document.getElementById("registrar").addEventListener("click", function(event) {
-    event.preventDefault(); // Evitar el envío del formulario
-    obtenerUbicacion(); // Llama a la función para obtener la ubicación
+document.addEventListener('DOMContentLoaded', () => {
+    const alerta = document.getElementById('alerta');
+    const colores = ['#28a745', '#dc3545', '#ffc107', '#007bff', '#6f42c1']; 
+
+    function seleccionarColorAleatorio() {
+        const indiceAleatorio = Math.floor(Math.random() * colores.length);
+        return colores[indiceAleatorio];
+    }
+
+    function generarMensajeAleatorio() {
+        const numeroAleatorio = Math.floor(100000 + Math.random() * 900000);
+        return `${numeroAleatorio}`; 
+    }
+
+    const colorAleatorio = seleccionarColorAleatorio();
+    const mensajeAleatorio = generarMensajeAleatorio();
+    
+    if (alerta) {
+        alerta.style.backgroundColor = colorAleatorio;
+        alerta.textContent = mensajeAleatorio;
+        alerta.style.display = 'block';
+    }
+
+    // Guardar el código y el color en localStorage para acceder desde el backend
+    localStorage.setItem('codigo_aleatorio', mensajeAleatorio);
+    localStorage.setItem('color_aleatorio', colorAleatorio);
 });
-
-function obtenerUbicacion() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(mostrarUbicacion, manejarError);
-    } else {
-        alert("La geolocalización no es soportada por este navegador.");
-    }
-}
-
-function mostrarUbicacion(position) {
-    const latB = position.coords.latitude;
-    const lngB = position.coords.longitude;
-
-    const parqueaderoSeleccionado = document.getElementById("Parqueadero").value;
-    const { lat, lng } = parqueaderos[parqueaderoSeleccionado];
-
-    const distancia = calcularDistancia(lat, lng, latB, lngB);
-
-    if (distancia <= rangoMaximo) {
-        alert('Estás dentro del rango.');
-        document.getElementById('entrada-form').submit(); // Enviar el formulario
-    } else {
-        alert('Estás fuera del rango permitido.');
-    }
-}

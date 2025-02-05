@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subir Evidencia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/U_cicloparqueadero/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/cicloparqueadero/css/style.css">
 </head>
 <body>
 <div class="container text-center">
@@ -17,7 +17,7 @@
     }
     ?>
     <div class="mb-4 border border-secondary text-center mt-5 d-flex align-items-center">
-        <img src="/U_cicloparqueadero/img/LOGOU.png" alt="Logo" class="me-3 ms-4" style="width: 50px; height: auto;">
+        <img src="/cicloparqueadero/img/LOGOU.png" alt="Logo" class="me-3 ms-4" style="width: 50px; height: auto;">
         <div>
             <div class="fs-2 fw-bolder ms-3">Cicloparqueadero</div>
             <div class="fs-6 fw-bolder mb-2 ms-3">Universidad del Rosario</div>

@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar entrada</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/U_cicloparqueadero/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/cicloparqueadero/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../js/validacion.js"></script>
 </head>
 <body>
 <div class="container text-center">
@@ -19,7 +18,7 @@
     }
     ?>
     <div class="mb-2 border border-secondary text-center mt-5 d-flex align-items-center">
-        <img src="/U_cicloparqueadero/img/LOGOU.png" alt="Logo" class="me-3 ms-4" style="width: 50px; height: auto;">
+        <img src="/cicloparqueadero/img/LOGOU.png" alt="Logo" class="me-3 ms-4" style="width: 50px; height: auto;">
         <div>
             <div class="fs-2 fw-bolder ms-3">Cicloparqueadero</div>
             <div class="fs-6 fw-bolder mb-2 ms-3">Universidad del Rosario</div>
@@ -62,8 +61,16 @@
         <div class="button group btn-group-lg mt-2 d-grid gap-2 ms-2">
             <button type="submit" name="registrar_entrada" id="registrar" class="btn btn-outline-secondary mt-2 mb-4 fs-6">Registrar entrada</button>
         </div>
+        <input type="hidden" name="codigo_aleatorio" id="codigo_aleatorio">
+        <input type="hidden" name="color_aleatorio" id="color_aleatorio">
     </form>
 </div>
 <script src="../js/validacionENT.js"></script>
+<script>
+    document.getElementById('entrada-form').addEventListener('submit', function() {
+        document.getElementById('codigo_aleatorio').value = localStorage.getItem('codigo_aleatorio');
+        document.getElementById('color_aleatorio').value = localStorage.getItem('color_aleatorio');
+    });
+</script>
 </body>
 </html>

@@ -12,9 +12,9 @@ $error = $_SESSION['error'] ?? '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/U_cicloparqueadero/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/cicloparqueadero/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/U_cicloparqueadero/js/val_registro.js"></script>
+    <script src="/cicloparqueadero/js/val_registro.js"></script>
 </head>
 <body>
     <?php if ($error): ?>
@@ -31,7 +31,7 @@ $error = $_SESSION['error'] ?? '';
     <div class="container">
         <div class="container text-center">
             <div class="mb-4 border border-secondary text-center mt-5 d-flex align-items-center">
-                <img src="/U_cicloparqueadero/img/LOGOU.png" alt="Logo" class="me-3 ms-4" style="width: 50px; height: auto;">
+                <img src="/cicloparqueadero/img/LOGOU.png" alt="Logo" class="me-3 ms-4" style="width: 50px; height: auto;">
                 <div>
                     <div class="fs-2 fw-bolder ms-3">Cicloparqueadero</div>
                     <div class="fs-6 fw-bolder mb-2 ms-3">Universidad del Rosario</div>
@@ -43,7 +43,7 @@ $error = $_SESSION['error'] ?? '';
             </div>
             <div id="formulario-iniciar" style="display:none;">
                 <div class="fs-2 text-start mb-3 mt-4 fw-bolder ms-2">Iniciar sesión</div>
-                <form action="/U_cicloparqueadero/controllers/UsuarioController.php" method="POST">
+                <form action="/cicloparqueadero/controllers/UsuarioController.php" method="POST">
                     <div class="form-floating mb-4 ms-2">
                         <input type="email" class="form-control" id="floatingInput" name="correo" placeholder="name@example.com" >
                         <label for="floatingInput">Correo Electronico</label>
@@ -59,7 +59,7 @@ $error = $_SESSION['error'] ?? '';
             </div>
             <div id="formulario-registro" style="display:none;">
                 <div class="fs-2 text-start mb-3 mt-4 fw-bolder ms-2">Registrarse</div>
-                <form id="registro-form" action="/U_cicloparqueadero/controllers/UsuarioController.php" method="POST">
+                <form id="registro-form" action="/cicloparqueadero/controllers/UsuarioController.php" method="POST">
                     <input type="hidden" name="registrar" value="1">
                     <div class="form-floating mb-3 ms-2">
                         <input type="text" class="form-control" id="nombre" name="nombres" placeholder="Nombres" >

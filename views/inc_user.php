@@ -19,7 +19,7 @@ $entradas = $data['entradas'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio sesión</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/U_cicloparqueadero/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/cicloparqueadero/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
@@ -39,7 +39,7 @@ $entradas = $data['entradas'];
     ?>
     <div class="container text-center">
         <div class="mb-2 border border-secondary text-center mt-5 d-flex align-items-center">
-            <img src="/U_cicloparqueadero/img/LOGOU.png" alt="Logo" class="me-3 ms-4" style="width: 50px; height: auto;">
+            <img src="/cicloparqueadero/img/LOGOU.png" alt="Logo" class="me-3 ms-4" style="width: 50px; height: auto;">
             <div>
                 <div class="fs-2 fw-bolder ms-3">Cicloparqueadero</div>
                 <div class="fs-6 fw-bolder mb-2 ms-3">Universidad del Rosario</div>
@@ -77,7 +77,7 @@ $entradas = $data['entradas'];
                                 <form action="../controllers/EntradaController.php" method="POST">
                                     <input type="hidden" name="id_entrada" value="<?php echo htmlspecialchars($entrada['id_entrada']); ?>">
                                     <button type="submit" name="registrar_salida" class="btn">
-                                        <img src="/U_cicloparqueadero/img/Salida.png" width="30px" height="30px">
+                                        <img src="/cicloparqueadero/img/Salida.png" width="30px" height="30px">
                                     </button>
                                 </form>
                             </td>
