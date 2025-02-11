@@ -14,10 +14,8 @@ class Usuario {
         $this->conn = $db;
     }
 
-    // Método para crear un nuevo usuario
     public function crear() {
         $query = "INSERT INTO " . $this->table_name . " SET nombres=:nombres, apellidos=:apellidos, correo=:correo, celular=:celular, clave=:clave";
-
         $stmt = $this->conn->prepare($query);
 
         // Limpieza de datos
@@ -27,9 +25,6 @@ class Usuario {
         $this->celular = htmlspecialchars(strip_tags($this->celular));
         $this->clave = htmlspecialchars(strip_tags($this->clave));
 
-        // Hash de la clave
-        $this->clave = password_hash($this->clave, PASSWORD_BCRYPT);
-
         // Bind de cada valor
         $stmt->bindParam(':nombres', $this->nombres);
         $stmt->bindParam(':apellidos', $this->apellidos);
@@ -37,41 +32,22 @@ class Usuario {
         $stmt->bindParam(':celular', $this->celular);
         $stmt->bindParam(':clave', $this->clave);
 
-        try {
-            if ($stmt->execute()) {
-                return true;
-            }
-        } catch (PDOException $e) {
-            if ($e->getCode() == 23000) {  // Código de error para duplicidad de entrada
-                return false;
-            }
+        if ($stmt->execute()) {
+            $this->id_usuario = $this->conn->lastInsertId(); // Guardar el id_usuario
+            return true;
         }
 
         return false;
     }
 
-    // Método para validar el inicio de sesión
     public function validar() {
-        $query = "SELECT id_usuario, nombres, apellidos, correo, celular, clave FROM " . $this->table_name . " WHERE correo = ? LIMIT 0,1";
-
+        $query = "SELECT id_usuario, clave FROM " . $this->table_name . " WHERE correo = :correo";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $this->correo);
+        $stmt->bindParam(':correo', $this->correo);
         $stmt->execute();
 
-        // Obtenemos la fila de la base de datos
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($row) {
-            // Comparamos la clave ingresada con la clave almacenada en la base de datos
-            if (password_verify($this->clave, $row['clave'])) {
-                // Si coinciden, establecemos las propiedades del objeto
-                $this->id_usuario = $row['id_usuario'];
-                $this->nombres = $row['nombres'];
-                $this->apellidos = $row['apellidos'];
-                $this->correo = $row['correo'];
-                $this->celular = $row['celular'];
-                return true;
-            }
+        if ($stmt->rowCount() > 0) {
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
         return false;

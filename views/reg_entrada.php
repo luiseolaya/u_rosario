@@ -32,7 +32,7 @@
         </div>
     <?php endif; ?>
     
-    <form  id="entrada-form"   action="../controllers/entradacontroller.php" method="POST">
+    <form id="entrada-form" action="../controllers/EntradaController.php" method="POST">
         <div id="alerta" class="text-center" style="display: none; padding: 20px; color: white; border-radius: 5px; margin-top: 10px;"></div>
         <div class="fs-2 text-start ms-2 mb-2 mt-2 fw-bolder">+ Entrada</div>
         <div class="text-start ms-3"><p>Favor colocar el código numérico que sale en la parte superior y elegir el color correspondiente</p></div>

@@ -30,7 +30,7 @@ $entradas = $data['entradas'];
                 title: '¡Éxito!',
                 text: '" . $_SESSION['mensaje'] . "',
                 icon: 'success',
-                timer: 3000,
+                timer: 4000,
                 timerProgressBar: true
             });
             </script>";
@@ -47,9 +47,9 @@ $entradas = $data['entradas'];
         </div>
         <div><h5>Bienvenido, <?php echo htmlspecialchars($usuario['correo']); ?></h5></div>
     
-            <form action="../controllers/LogoutController.php" method="POST">
-                <button type="submit" name="logout" class="btn btn-outline-secondary">Salir</button>
-            </form>
+        <form action="../controllers/LogoutController.php" method="POST">
+            <button type="submit" name="logout" class="btn btn-outline-secondary">Salir</button>
+        </form>
     
         <a href="reg_entrada.php">
             <div class="btn btn-outline-secondary mt-3 mb-4 me-4 btn-lg">+ Entrada</div>
@@ -71,12 +71,12 @@ $entradas = $data['entradas'];
                         <tr>
                             <th scope="row">&#x2611;&#xfe0f;</th>
                             <td><?php echo htmlspecialchars($entrada['fecha_hora']); ?></td>
-                            <td><?php echo htmlspecialchars($entrada['id_parqueadero']); ?></td>
+                            <td><?php echo htmlspecialchars($entrada['sede_parqueadero']); ?></td>
                             <td>Evento</td>
                             <td>
                                 <form action="../controllers/EntradaController.php" method="POST">
                                     <input type="hidden" name="id_entrada" value="<?php echo htmlspecialchars($entrada['id_entrada']); ?>">
-                                    <button type="submit" name="registrar_salida" class="btn">
+                                    
                                         <img src="/cicloparqueadero/img/Salida.png" width="30px" height="30px">
                                     </button>
                                 </form>

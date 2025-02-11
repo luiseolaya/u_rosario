@@ -25,6 +25,15 @@
             </a>          
         </div>
         <div class="fs-2 text-start mb-3 mt-4 fw-bolder ms-2">Iniciar sesión</div>
+
+        <?php
+        session_start();
+        if (isset($_SESSION['error'])) {
+            echo '<div class="alert alert-danger" role="alert">' . $_SESSION['error'] . '</div>';
+            unset($_SESSION['error']);
+        }
+        ?>
+
         <form action="../controllers/UsuarioController.php" method="POST">
             <div class="form-floating mb-4 ms-2">
                 <input type="email" class="form-control" id="floatingInput" name="correo" placeholder="name@example.com" required>

@@ -6,8 +6,6 @@ class Entrada {
     public $id_entrada;
     public $id_usuario;
     public $id_parqueadero;
-    public $codigo;
-    public $color;
     public $fecha_hora;
 
     public function __construct($db) {
@@ -15,21 +13,24 @@ class Entrada {
     }
 
     public function crearEntrada() {
-        $query = "INSERT INTO " . $this->table_name . " SET id_usuario=:id_usuario, id_parqueadero=:id_parqueadero, codigo=:codigo, color=:color, fecha_hora=NOW()";
+        $query = "INSERT INTO " . $this->table_name . " SET id_usuario=:id_usuario, id_parqueadero=:id_parqueadero, fecha_hora=:fecha_hora";
 
         $stmt = $this->conn->prepare($query);
 
         // Limpieza de datos
         $this->id_usuario = htmlspecialchars(strip_tags($this->id_usuario));
         $this->id_parqueadero = htmlspecialchars(strip_tags($this->id_parqueadero));
-        $this->codigo = htmlspecialchars(strip_tags($this->codigo));
-        $this->color = htmlspecialchars(strip_tags($this->color));
+        $this->fecha_hora = htmlspecialchars(strip_tags($this->fecha_hora));
 
         // Bind de cada valor
         $stmt->bindParam(':id_usuario', $this->id_usuario);
         $stmt->bindParam(':id_parqueadero', $this->id_parqueadero);
-        $stmt->bindParam(':codigo', $this->codigo);
-        $stmt->bindParam(':color', $this->color);
+        $stmt->bindParam(':fecha_hora', $this->fecha_hora);
+
+        // Depuración: Verificar valores antes de ejecutar
+        error_log("ID Usuario (crearEntrada): " . $this->id_usuario);
+        error_log("ID Parqueadero (crearEntrada): " . $this->id_parqueadero);
+        error_log("Fecha y Hora (crearEntrada): " . $this->fecha_hora);
 
         if ($stmt->execute()) {
             return true;
@@ -38,4 +39,3 @@ class Entrada {
         return false;
     }
 }
-?>

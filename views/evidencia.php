@@ -26,7 +26,9 @@
     <div><h5>Bienvenido, <?php echo htmlspecialchars($_SESSION['correo']); ?></h5></div>
     
     <video id="video" width="320" height="240" autoplay></video>
-    <button id="startbutton">Tomar foto</button>
+    <div class="d-flex justify-content-center">
+        <img src="/cicloparqueadero/img/camara.png" id="startbutton" alt="Tomar foto" style="cursor: pointer; width: 50px; height: auto;">
+    </div>
     <canvas id="canvas" style="display:none;"></canvas>
     <img src="http://placekitten.com/g/320/261" id="photo" alt="Foto tomada" />
     
