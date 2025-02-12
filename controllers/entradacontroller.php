@@ -26,9 +26,24 @@ class EntradaController {
         if (!empty($_POST)) {
             $codigo_aleatorio = $_POST['codigo_aleatorio'];
             $color_aleatorio = $_POST['color_aleatorio'];
+            $latUsuario = $_POST['lat_usuario'];
+            $lngUsuario = $_POST['lng_usuario'];
+
+            // Coordenadas del parqueadero A  
+            $latParqueadero = 4.601025504132103;
+            $lngParqueadero = -74.07303884639771;
+            $rangoMaximo = 1000000000; //cambiar luego 
 
             if ($_POST['codigo'] !== $codigo_aleatorio || $_POST['color'] !== $color_aleatorio || $_POST['id_parqueadero'] == 'Seleccione el Cicloparqueadero') {
                 $_SESSION['error'] = 'Ingrese de nuevo el código, color y parqueadero seleccionados.';
+                header("Location: ../views/reg_entrada.php");
+                exit;
+            }
+
+            // Validar la distancia entre el usuario y el parqueadero
+            $distancia = $this->calcularDistancia($latUsuario, $lngUsuario, $latParqueadero, $lngParqueadero);
+            if ($distancia > $rangoMaximo) {
+                $_SESSION['error'] = 'Estás fuera del rango permitido.';
                 header("Location: ../views/reg_entrada.php");
                 exit;
             }
@@ -38,6 +53,17 @@ class EntradaController {
             header("Location: ../views/evidencia.php"); // Redirige a la vista evidencia.php
             exit;
         }
+    }
+
+    private function calcularDistancia($lat1, $lon1, $lat2, $lon2) {
+        $radioTierra = 6371; // Radio de la Tierra en km
+        $dLat = deg2rad($lat2 - $lat1);
+        $dLon = deg2rad($lon2 - $lon1);
+        $a = sin($dLat / 2) * sin($dLat / 2) +
+            cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * 
+            sin($dLon / 2) * sin($dLon / 2);
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+        return $radioTierra * $c; // Distancia en km
     }
 }
 

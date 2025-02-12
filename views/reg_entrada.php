@@ -63,13 +63,67 @@
         </div>
         <input type="hidden" name="codigo_aleatorio" id="codigo_aleatorio">
         <input type="hidden" name="color_aleatorio" id="color_aleatorio">
+        <input type="hidden" name="lat_usuario" id="lat_usuario">
+        <input type="hidden" name="lng_usuario" id="lng_usuario">
     </form>
 </div>
-<script src="../js/validacionENT.js"></script>
 <script>
-    document.getElementById('entrada-form').addEventListener('submit', function() {
-        document.getElementById('codigo_aleatorio').value = localStorage.getItem('codigo_aleatorio');
-        document.getElementById('color_aleatorio').value = localStorage.getItem('color_aleatorio');
+    document.addEventListener('DOMContentLoaded', () => {
+        const alerta = document.getElementById('alerta');
+        const colores = ['#28a745', '#dc3545', '#ffc107', '#007bff', '#6f42c1']; 
+
+        function seleccionarColorAleatorio() {
+            const indiceAleatorio = Math.floor(Math.random() * colores.length);
+            return colores[indiceAleatorio];
+        }
+
+        function generarMensajeAleatorio() {
+            const numeroAleatorio = Math.floor(100000 + Math.random() * 900000);
+            return `${numeroAleatorio}`; 
+        }
+
+        const colorAleatorio = seleccionarColorAleatorio();
+        const mensajeAleatorio = generarMensajeAleatorio();
+        
+        if (alerta) {
+            alerta.style.backgroundColor = colorAleatorio;
+            alerta.textContent = mensajeAleatorio;
+            alerta.style.display = 'block';
+        }
+
+        // Guardar el código y el color en localStorage para acceder desde el backend
+        localStorage.setItem('codigo_aleatorio', mensajeAleatorio);
+        localStorage.setItem('color_aleatorio', colorAleatorio);
+
+        // Geolocalización y Validación
+        function obtenerUbicacion() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(mostrarUbicacion, manejarError);
+            } else {
+                alert("La geolocalización no es soportada por este navegador.");
+            }
+        }
+
+        function mostrarUbicacion(position) {
+            const latB = position.coords.latitude;
+            const lngB = position.coords.longitude;
+
+            document.getElementById('lat_usuario').value = latB;
+            document.getElementById('lng_usuario').value = lngB;
+        }
+
+        function manejarError(error) {
+            console.error('Error al obtener la ubicación: ', error);
+            alert('No se pudo obtener la ubicación.');
+        }
+
+        obtenerUbicacion(); // Obtener la ubicación al cargar la página
+
+        document.getElementById('entrada-form').addEventListener('submit', function(event) {
+            // Guardar código y color antes de enviar el formulario
+            document.getElementById('codigo_aleatorio').value = localStorage.getItem('codigo_aleatorio');
+            document.getElementById('color_aleatorio').value = localStorage.getItem('color_aleatorio');
+        });
     });
 </script>
 </body>
