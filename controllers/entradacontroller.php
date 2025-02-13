@@ -28,11 +28,23 @@ class EntradaController {
             $color_aleatorio = $_POST['color_aleatorio'];
             $latUsuario = $_POST['lat_usuario'];
             $lngUsuario = $_POST['lng_usuario'];
+            $idParqueadero = $_POST['id_parqueadero'];
 
-            // Coordenadas del parqueadero A  
-            $latParqueadero = 4.601025504132103;
-            $lngParqueadero = -74.07303884639771;
-            $rangoMaximo = 1000000000; //cambiar luego 
+            // Coordenadas de los parqueaderos
+            $parqueaderos = [
+                1 => ['lat' => 4.601025504132103, 'lng' => -74.07303884639771],  // Parqueadero A
+                2 => ['lat' => 66.76717277970545, 'lng' => 175.597189200234],   // Parqueadero B
+            ];
+
+            if (!isset($parqueaderos[$idParqueadero])) {
+                $_SESSION['error'] = 'Seleccione un parqueadero válido.';
+                header("Location: ../views/reg_entrada.php");
+                exit;
+            }
+
+            $latParqueadero = $parqueaderos[$idParqueadero]['lat'];
+            $lngParqueadero = $parqueaderos[$idParqueadero]['lng'];
+            $rangoMaximo = 1000; // Cambiar según sea necesario
 
             if ($_POST['codigo'] !== $codigo_aleatorio || $_POST['color'] !== $color_aleatorio || $_POST['id_parqueadero'] == 'Seleccione el Cicloparqueadero') {
                 $_SESSION['error'] = 'Ingrese de nuevo el código, color y parqueadero seleccionados.';
@@ -50,7 +62,7 @@ class EntradaController {
 
             // Guardar datos temporales en la sesión
             $_SESSION['entrada_temp'] = $_POST;
-            header("Location: ../views/evidencia.php"); // Redirige a la vista evidencia.php
+            header("Location: ../views/evidencia.php"); // llama a la vista evidencia.php
             exit;
         }
     }

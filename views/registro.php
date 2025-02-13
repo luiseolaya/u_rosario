@@ -14,7 +14,6 @@ $error = $_SESSION['error'] ?? '';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/cicloparqueadero/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/cicloparqueadero/js/val_registro.js"></script>
 </head>
 <body>
     <?php if ($error): ?>
@@ -96,6 +95,7 @@ $error = $_SESSION['error'] ?? '';
             </div>
         </div>
     </div>
+    <script src="/cicloparqueadero/js/val_registro.js"></script>
     <script>
         function mostrarFormulario(tipo) {
             document.getElementById('formulario-iniciar').style.display = 'none';

@@ -25,7 +25,7 @@ class EvidenciaController {
             error_log("ID Usuario: " . $_SESSION['id_usuario']);
             error_log("ID Parqueadero: " . $_SESSION['entrada_temp']['id_parqueadero']);
 
-            // Asignar valores al modelo
+            //  valores al modelo
             $this->entrada->id_usuario = $_SESSION['id_usuario'];
             $this->entrada->id_parqueadero = $_SESSION['entrada_temp']['id_parqueadero'];
             $this->entrada->fecha_hora = date('Y-m-d H:i:s');
