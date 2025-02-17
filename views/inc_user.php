@@ -72,7 +72,7 @@ $entradas = $data['entradas'];
                             <th scope="row">&#x2611;&#xfe0f;</th>
                             <td><?php echo htmlspecialchars($entrada['fecha_hora']); ?></td>
                             <td><?php echo htmlspecialchars($entrada['sede_parqueadero']); ?></td>
-                            <td>Evento</td>
+                            <td>Entrada</td>
                             <td>
                                 <form action="../controllers/EntradaController.php" method="POST">
                                     <input type="hidden" name="id_entrada" value="<?php echo htmlspecialchars($entrada['id_entrada']); ?>">
